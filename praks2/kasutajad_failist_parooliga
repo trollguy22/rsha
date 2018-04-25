@@ -1,0 +1,4 @@
+#!/bin/bash
+useradd -m -s -p kasutajad_paroolid /bin/bash kasutajad_paroolid
+
+
