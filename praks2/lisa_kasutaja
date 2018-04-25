@@ -1,0 +1,4 @@
+!#/bin/bash
+echo -n "sisesta kasutajanimi: "
+read kasutajanimi
+adduser $kasutajanimi -y
