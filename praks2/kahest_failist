@@ -1,0 +1,10 @@
+#!/bin/bash
+data=$(paste -d: $1 $2)
+for row in $(paste -d: $1 $2)
+do
+	kasutaja=$(echo $row | awk -F":" '{print $1}')
+	useradd -m -s /bin/bash $kasutaja
+	echo $row | chpasswd
+done
+cat /etc/passwd | grep '*kasutaja*'
+
