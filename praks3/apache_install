@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ dpkg-query -W -f='${Status}' apache2 | grep -c 'ok installed' -eq 1 ]
+then
+echo "apache on juba peal"
+else
+apt-get install apache2 -y
+dpkg-query -W -f='${Status}' apache2
+fi
