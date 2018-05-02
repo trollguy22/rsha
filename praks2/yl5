@@ -1,0 +1,7 @@
+#!/bin/bash
+kasutajanimied=$1
+useradd $kasutajanimi -m -s /bin/bash
+echo "lisatud kasutajad failist $1"
+for i in $( cat kasutajad );
+do pwgen -s -1 8 1 | sed "s/^/$i /";
+done
