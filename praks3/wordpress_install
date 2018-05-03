@@ -1,19 +1,12 @@
 #!/bin/bash
-if [ dpkg-query -W -f='${Status}' apache2 php7.0 mysql-server phpmyadmin -ne 1 ] then
-echo "Installi enne vajalikud asjad ära!"
-exit
-else
+if [ dpkg-query -W -f='${Status}' apache2 php7.0 mysql-server phpmyadmin -eq 1 ] then
+echo "kõik korras"
 echo "andmebaas nimi: "
 read -e animi
 echo "kasutaja: "
 read -e akasutaja
 echo "andmebaasi parool"
 read -e aparool
-echo "installi wordpress? (y/n)"
-read valik
-if [ "$valik" == n ] ; then
-exit
-else
 apt-get install curl -y
 curl -O https://wordpress.org/latest.tar.gz
 tar -zxvf latest.tar.gz
@@ -40,7 +33,7 @@ mkdir wp-content/uploads
 chmod 775 wp-content/uploads
 rm latest.tar.gz
 echo "valmis"
+else
+echo "paigalda enne vajalikud paketid!"
 fi
-
-
-
+fi
