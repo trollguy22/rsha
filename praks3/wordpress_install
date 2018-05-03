@@ -1,0 +1,46 @@
+#!/bin/bash
+if [ dpkg-query -W -f='${Status}' apache2 php7.0 mysql-server phpmyadmin -ne 1 ] then
+echo "Installi enne vajalikud asjad ära!"
+exit
+else
+echo "andmebaas nimi: "
+read -e animi
+echo "kasutaja: "
+read -e akasutaja
+echo "andmebaasi parool"
+read -e aparool
+echo "installi wordpress? (y/n)"
+read valik
+if [ "$valik" == n ] ; then
+exit
+else
+apt-get install curl -y
+curl -O https://wordpress.org/latest.tar.gz
+tar -zxvf latest.tar.gz
+cd wordpress
+cp -rf . ..
+cd ..
+rm -R wordpress
+cp wp-config-sample.php wp-config.php
+apt-get install perl -y
+perl -pi -e "s/database_name_here/$animi/g" wp-config.php
+perl -pi -e "s/username_here/$akasutaja/g" wp-config.php
+perl -pi -e "s/password_here/$aparool/g" wp-config.php
+
+perl -i -pe'
+	BEGIN {
+	@chars = ("a" .. "z", "A" .. "Z", 0 .. 9);
+	push @chars, split //, "!@#$%^&*()-_ []{}<>~\`+=,.;:/?|";
+	sub salt { join ""; map $chars[ rand @chars ], 1 .. 64 }
+}
+s/put your unique phrase here/salt()/ge
+' wp-config.php
+
+mkdir wp-content/uploads
+chmod 775 wp-content/uploads
+rm latest.tar.gz
+echo "valmis"
+fi
+
+
+
