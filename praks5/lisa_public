@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "sisesta kasutajanimi: "
+read kasutajanimi
+useradd -m -d /home/$kasutajanimi $kasutajanimi
+cd /home/$kasutajanimi
+mkdir public
+chmod 777 public
+ls -la /home/$kasutajanimi
