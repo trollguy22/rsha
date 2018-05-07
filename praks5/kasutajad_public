@@ -1,6 +1,7 @@
 #!/bin/bash
 ls -la /home/*/
-if ( ls -la /home/*/ | grep public -eq 1 );
+publiccheck=$(ls -la /home/*/ | grep -c 'public')
+if ( $publickcheck -eq 1 );
 then
 chmod 777 /home/*/public
 else mkdir /home/*/public
