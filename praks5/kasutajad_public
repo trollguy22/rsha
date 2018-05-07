@@ -1,0 +1,10 @@
+#!/bin/bash
+ls -la /home/*/
+if ( ls -la /home/*/ | grep 'public' -eq 1 );
+then
+chmod 777 /home/*/public
+else
+for dir in /home/; do mkdir "$dir/public;
+fi
+ls -la /home/*/ | grep 'public'
+
