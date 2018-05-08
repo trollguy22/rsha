@@ -2,9 +2,9 @@
 pass=`pwgen -s 40 1`
 echo "Sisesta kasutajanimi: "
 read kasutajanimi
-mysql -u root
+mysql -u root -pqwerty
 create database wordpress;
-create user '$kasutajanimi''@'localhost' identified by '$pass';
-grant all privileges on wordpress.* to '$kasutajanimi'@'localhost';
+create user "$kasutajanimi""@"localhost' identified by "$pass";
+grant all privileges on wordpress.* to "$kasutajanimi"@"localhost";
 flush privileges;
-
+exit
