@@ -1,0 +1,14 @@
+#!/bin/bash
+pass=$(pwgen -s 8 1)
+echo  "Sisesta kasutajanimi: "
+read kasutajanimi
+if [  (home/$kasutajanimi/ | grep .my.cnf -eq 1 ]; then
+echo ".my.cnf olemas"
+else
+mkdir /home/$kasutajanimi
+echo "$kasutajanimi:$pass >> /home/$kasutajanimi.my.cnf
+mysql -u root -pqwerty
+echo "create user '$kasutajanimi''@''localhost' identified by '$pass';" | mysql -u root -pqwerty
+echo "grant all privileges on wordpress.* to $'kasutajanimi'@'localhost';" | mysql -u root -pqwerty
+echo "flush privileges;" | mysql -u root -pqwerty
+fi
