@@ -4,8 +4,8 @@ echo "Sisesta kasutajanimi: "
 read kasutajanimi
 mysql -u root -pqwerty
 echo "create database wordpress;" | mysql -u root -pqwerty
-echo "create user '$kasutajanimi''@'localhost' identified by '$pass'"; | mysql -u root -pqwerty
-echo "grant all privileges on wordpress.* to '$kasutajanimi'@'localhost'"; | mysql -u root -pqwerty
+echo "create user '$kasutajanimi''@'localhost' identified by '$pass';" | mysql -u root -pqwerty
+echo "grant all privileges on wordpress.* to '$kasutajanimi'@'localhost';" | mysql -u root -pqwerty
 echo "flush privileges;" | mysql -u root -pqwerty
 if [ -d (home/$kasutajanimi/ ]; then
 	echo "$kasutajanimi:$pass" >> /home/$kasutajanimi/.my.cnf
