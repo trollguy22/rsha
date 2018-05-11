@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Sisesta kasutajanimi"
+read $kasutajanimi
+animi=""$kasutajanimi"_test"
+aeg=$(date +"%Y-%m-%d.%H-%M")
+parool=$(cat /home/$kasutajanimi/.my.cnf | awk -F":" '{print $2}')
+if [ -d /mysql_backup ]; then
+mysqldump -u $kasutajanimi -p$parool $animi > /mysql_backup/$aeg.$animi.backup.sql
+else
+mkdir /mysql_backup
+mysqldump -u $kasutajanimi -p$parool $animi > /mysql_backup/$aeg.$dbname.backup.sql
+fi
